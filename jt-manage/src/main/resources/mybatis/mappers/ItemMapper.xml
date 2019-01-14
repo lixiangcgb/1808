@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 标识映射文件  -->
+<mapper namespace="com.jt.manage.mapper.ItemMapper">
+	
+	<!--Mysql数据库中表名和字段小写,Oracle中表名和字段名大写 
+		ctrl + shift + y  小写
+		ctrl + shift + x  大写
+	 -->
+	<select id="findItemByPage" resultType="Item">
+			select * from tb_item order by updated desc 
+			limit #{start},#{rows}
+	</select>
+	
+	<!--
+		collection = 取值方式
+		1.Map传参  写的是map中的key
+		2.数组[]  添加array
+		3.List    添加list 
+	  -->
+	
+	<update id="updateStatus">
+		update tb_item set status = #{status},updated = now() where id in 
+		( 
+			<foreach collection="ids" item="id" separator=",">
+				#{id}
+			</foreach>
+		)
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
